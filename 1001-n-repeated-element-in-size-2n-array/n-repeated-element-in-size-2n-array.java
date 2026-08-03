@@ -1,13 +1,14 @@
 class Solution {
     public int repeatedNTimes(int[] nums) {
-        HashMap<Integer,Integer>ans=new HashMap<>();
-        int val=0;
-        for(int i=0;i<nums.length;i++){
-            if(ans.containsKey(nums[i])){
-                val=nums[i];
+        Set<Integer>ans=new HashSet<>();
+       // int val=0;
+        for(int i:nums){
+            if(ans.contains(i)){
+                return i;
             }
-            ans.put(nums[i],i);
+            ans.add(i);
+
         }
-        return val;
+        return -1;
     }
 }
