@@ -1,16 +1,19 @@
 class Solution {
-    public int uniquePaths(int m, int n) {
-       int [][]dp=new int[m][n];
-       return  search(m-1,n-1,dp);
-    }
-    public static int search(int row,int col,int [][]dp){
-        if(col==0 || row==0){
+    public int count(int i,int j,int n,int m,int [][]dp){
+        if(i==n-1 && j==m-1){
             return 1;
         }
-        if( dp[row][col] != 0){
-           return  dp[row][col];
+        if(i>=n || j>=m || j<0 || i<0) return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        int right=count(i,j+1,n,m,dp);
+        int down=count(i+1,j,n,m,dp);
+        return dp[i][j]=right+down;
+    }
+    public int uniquePaths(int m, int n) {
+        int dp[][]=new int[m+1][n+1];
+        for(int i[]:dp){
+            Arrays.fill(i,-1);
         }
-       dp[row][col]= search(row-1,col,dp)+search(row,col-1,dp);
-       return dp[row][col];
+        return count(0,0,m,n,dp);
     }
 }
